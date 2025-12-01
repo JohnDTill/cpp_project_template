@@ -6,22 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/vcpkg
-            ./build/vcpkg_installed
-            ${{ env.CONAN_USER_HOME }}
-            ~/.cache/pip
-            ${{ env.HOME }}/.cache/vcpkg/archives
-            ${{ env.XDG_CACHE_HOME }}/vcpkg/archives
-            ${{ env.LOCALAPPDATA }}\vcpkg\archives
-            ${{ env.APPDATA }}\vcpkg\archives
-          key: ${{ runner.os }}-${{ matrix.compiler }}-${{ hashFiles('./vcpkg.json')}}-${{ matrix.CMAKE_GENERATOR }}-${{ hashFiles('**/CMakeLists.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.compiler }}-${{ hashFiles('./vcpkg.json') }}-
-
       - name: Setup Cpp
         uses: aminya/setup-cpp@v1
         with:
@@ -32,7 +16,11 @@ jobs:
           vcpkg: true
           ccache: true
           clangtidy: true
-          
+
+      - name: Setup anew (or from cache) vcpkg (and does not build any package)
+        uses: lukka/run-vcpkg@v11
+        runVcpkgInstall: true
+
       - id: cmake_configure
         run: cmake -D CMAKE_BUILD_TYPE=Debug -B build_test
       - id: cmake_build
