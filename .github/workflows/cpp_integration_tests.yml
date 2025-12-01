@@ -12,8 +12,8 @@ jobs:
           runVcpkgInstall: true
 
       - id: cmake_configure
-        run: cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -Bbuild_test
+        run: cmake -D CMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -S . -B build_test
       - id: cmake_build
-        run: cmake --build build_test --target IntegrationTests
+        run: cmake --build build_test --config Debug --target IntegrationTests
       - id: ctest
-        run: ctest --test-dir build_test
+        run: ctest --test-dir build_test -V
