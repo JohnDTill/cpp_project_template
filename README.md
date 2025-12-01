@@ -42,4 +42,6 @@ TEMPLATE: fill in or delete section
 
 # CI Status
 
+[![C++ Integration Tests](https://github.com/JohnDTill/cpp_project_template/actions/workflows/cpp_integration_tests.yml/badge.svg)](https://github.com/JohnDTill/cpp_project_template/actions/workflows/cpp_integration_tests.yml)
+
 [![Finished work](https://github.com/JohnDTill/cpp_project_template/actions/workflows/to-do_check.yml/badge.svg)](https://github.com/JohnDTill/cpp_project_template/actions/workflows/to-do_check.yml)

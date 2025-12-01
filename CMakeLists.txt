@@ -13,3 +13,10 @@ target_link_libraries(cpp_project_template PRIVATE fmt::fmt)
 
 install(TARGETS cpp_project_template
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+# Testing setup
+enable_testing()
+add_executable(IntegrationTests test/integration_test_driver.cpp)
+get_target_property(LIBS cpp_project_template LINK_LIBRARIES)
+target_link_libraries(IntegrationTests PRIVATE ${LINK_LIBRARIES})
+add_test(NAME IntegrationTests COMMAND IntegrationTests)
