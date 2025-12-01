@@ -14,6 +14,12 @@ jobs:
             compiler: clang
           - os: windows-latest
             compiler: msvc
+          - os: ubuntu-latest
+            compiler: gcc
+            arch: x86
+          - os: ubuntu-latest
+            compiler: clang
+            arch: x86
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -27,8 +33,13 @@ jobs:
       - name: Configure, Build, and Test
         shell: bash
         run: |
+          CMAKE_FLAGS=""
+          if [ "$ARCH" = "x86" ]; then
+              CMAKE_FLAGS="-DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32"
+          fi
+
           VCPKG_ROOT_POSIX=$(wslpath "${VCPKG_ROOT}" 2>/dev/null || echo "${VCPKG_ROOT}")
-          cmake -D CMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT_POSIX/scripts/buildsystems/vcpkg.cmake -S . -B build_test
+          cmake -D CMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT_POSIX/scripts/buildsystems/vcpkg.cmake -S . -B build_test $CMAKE_FLAGS
 
           BUILD_CONFIG_CMAKE=""
           BUILD_CONFIG_CTEST=""
