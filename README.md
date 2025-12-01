@@ -11,6 +11,7 @@ This template exists to consolidate my idea of best practice for the kind of C++
   - [ ] Integration tests
     - [ ] Matrix of various OS and compiler targets
     - [ ] Smoke tests for all commits, extensive tests for MRs against main
+  - [ ] Tests of "meta" Python code
 
 vcpkg is preferred instead of conan because of frequent dependence on LGPL-licensed libraries which have less obligations when dynamic linking. conan leaves it up the package maintainers to specify if a package is shared (dynamically linked), which leaves gaps like GMP not having a shared package for Windows. vcpkg provides the linking option to the package recipient for all packages.
 
