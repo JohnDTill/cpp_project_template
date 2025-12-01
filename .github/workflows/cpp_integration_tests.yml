@@ -27,5 +27,7 @@ jobs:
       - name: Configure, Build, and Test
         run: |
           cmake -D CMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -S . -B build_test
-          cmake --build build_test --config Debug --target IntegrationTests
-          ctest --test-dir build_test --config Debug -V
+          BUILD_CONFIG=""
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then BUILD_CONFIG="--config Debug"; fi
+          cmake --build build_test --target IntegrationTests $BUILD_CONFIG
+          ctest --test-dir build_test -V $BUILD_CONFIG
