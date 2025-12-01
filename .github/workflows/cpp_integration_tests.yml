@@ -19,7 +19,8 @@ jobs:
 
       - name: Setup anew (or from cache) vcpkg (and does not build any package)
         uses: lukka/run-vcpkg@v11
-        runVcpkgInstall: true
+        with:
+          runVcpkgInstall: true
 
       - id: cmake_configure
         run: cmake -D CMAKE_BUILD_TYPE=Debug -B build_test
