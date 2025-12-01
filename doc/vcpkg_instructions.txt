@@ -1,0 +1,13 @@
+Add a package to "vcpkg.json" with:
+vcpkg add port <PACKAGE_NAME>
+  e.g.  "vcpkg add port fmt"
+
+Install packages with:
+vcpkg install --triplet <TRIPLET_NAME>
+  e.g. "vcpkg install --triplet x64-windows-release"
+        "x64-linux"
+  Note: The triplet choice determines dynamic vs. static linking. Choose dynamic for LGPL license compliance without implications on your project.
+
+For QtCreator integration:
+* Upgrade to a version of QtCreator with the vckpg pluging
+* Follow instructions at https://doc.qt.io/qtcreator/creator-vcpkg.html
