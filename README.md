@@ -3,14 +3,12 @@ This template exists to consolidate my idea of best practice for the kind of C++
 - [ ] vcpkg external library management
   - [x] QtCreator integration
   - [ ] VSCode integration
-- [ ] "test" directory for integration tests
+- [x] "test" directory for integration tests
 - [ ] "meta" directory for code generation step prior to C++ project build
 - [ ] "installer" directory for QtInstaller providing easy Windows installation and registering associated file types
 - [ ] ".github/workflows" directory for automated CI tests
   - [x] Unfinished work check
-  - [ ] Integration tests
-    - [ ] Matrix of various OS and compiler targets
-    - [ ] Smoke tests for all commits, extensive tests for MRs against main
+  - [x] Integration tests
   - [ ] Tests of "meta" Python code
 
 vcpkg is preferred instead of conan because of frequent dependence on LGPL-licensed libraries which have less obligations when dynamic linking. conan leaves it up to the package maintainers to specify if a package is shared (dynamically linked), which results in gaps like Windows lacking a shared package for GMP. vcpkg provides the linking option to the package recipient for all packages.
