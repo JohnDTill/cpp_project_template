@@ -6,6 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - id: cmake
-        run: cmake -DCMAKE_BUILD_TYPE=Debug -B../build_test -S. --target IntegrationTests
+        run: cmake -D CMAKE_BUILD_TYPE=Debug -B build_test --target IntegrationTests
       - id: ctest
-        run: ctest --test-dir build
+        run: ctest --test-dir build_test
