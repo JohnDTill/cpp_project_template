@@ -6,18 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Setup Cpp
-        uses: aminya/setup-cpp@v1
-        with:
-          compiler: ${{ matrix.compiler }}
-          vcvarsall: ${{ contains(matrix.os, 'windows' )}}
-          cmake: "3.28.4"
-          ninja: true
-          vcpkg: true
-          ccache: true
-          clangtidy: true
-
-      - name: Setup anew (or from cache) vcpkg (and does not build any package)
+      - name: Install and run vcpkg
         uses: lukka/run-vcpkg@v11
         with:
           runVcpkgInstall: true
