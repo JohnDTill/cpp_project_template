@@ -42,4 +42,4 @@ TEMPLATE: fill in or delete section
 
 # CI Status
 
-[![Unfinished work](https://github.com/JohnDTill/Forscape/actions/workflows/to-do_check.yml/badge.svg)](https://github.com/JohnDTill/Forscape/actions/workflows/to-do_check.yml)
+[![Finished work](https://github.com/JohnDTill/cpp_project_template/actions/workflows/to-do_check.yml/badge.svg)](https://github.com/JohnDTill/cpp_project_template/actions/workflows/to-do_check.yml)
