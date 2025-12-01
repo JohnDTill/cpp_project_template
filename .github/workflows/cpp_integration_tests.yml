@@ -25,6 +25,7 @@ jobs:
           runVcpkgInstall: true
 
       - name: Configure, Build, and Test
+        shell: bash
         run: |
           cmake -D CMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -S . -B build_test
           BUILD_CONFIG=""
