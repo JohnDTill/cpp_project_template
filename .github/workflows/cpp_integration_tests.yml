@@ -2,7 +2,20 @@ name: C++ Integration Tests
 on: push
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            compiler: gcc
+          - os: ubuntu-latest
+            compiler: clang
+          - os: macos-latest
+            compiler: clang
+          - os: windows-latest
+            compiler: msvc
+
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
 
