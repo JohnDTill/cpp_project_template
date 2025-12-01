@@ -20,6 +20,9 @@ jobs:
           - os: ubuntu-latest
             compiler: clang
             arch: x86
+          - os: windows-latest
+            compiler: msvc
+            arch: x86
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -35,7 +38,11 @@ jobs:
         run: |
           CMAKE_FLAGS=""
           if [ "$ARCH" = "x86" ]; then
-              CMAKE_FLAGS="-DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32"
+            if [ "$RUNNER_OS" = "Windows" ]; then
+              CMAKE_FLAGS="-A Win32"
+            else 
+              CMAKE_FLAGS="-D CMAKE_C_FLAGS=-m32 -D CMAKE_CXX_FLAGS=-m32"
+            fi
           fi
 
           VCPKG_ROOT_POSIX=$(wslpath "${VCPKG_ROOT}" 2>/dev/null || echo "${VCPKG_ROOT}")
