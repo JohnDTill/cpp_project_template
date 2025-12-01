@@ -29,8 +29,13 @@ jobs:
         run: |
           VCPKG_ROOT_POSIX=$(wslpath "${VCPKG_ROOT}" 2>/dev/null || echo "${VCPKG_ROOT}")
           cmake -D CMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT_POSIX/scripts/buildsystems/vcpkg.cmake -S . -B build_test
-          BUILD_CONFIG=""
-          if [ "${{ matrix.os }}" = "windows-latest" ]; then BUILD_CONFIG="--config Debug"; fi
-          cmake --build build_test --target IntegrationTests $BUILD_CONFIG
-          if [ "${{ matrix.os }}" = "windows-latest" ]; then BUILD_CONFIG="-C Debug"; fi
-          ctest --test-dir build_test -V $BUILD_CONFIG
+
+          BUILD_CONFIG_CMAKE=""
+          BUILD_CONFIG_CTEST=""
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            BUILD_CONFIG_CMAKE="--config Debug"
+            BUILD_CONFIG_CTEST="-C Debug"
+          fi
+
+          cmake --build build_test --target IntegrationTests $BUILD_CONFIG_CMAKE
+          ctest --test-dir build_test -V $BUILD_CONFIG_CTEST
