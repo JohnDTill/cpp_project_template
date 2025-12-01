@@ -5,7 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - id: cmake
-        run: cmake -D CMAKE_BUILD_TYPE=Debug -B build_test --target IntegrationTests
+      - id: cmake_configure
+        run: cmake -D CMAKE_BUILD_TYPE=Debug -B build_test
+      - id: cmake_build
+        run: cmake --build build_test --target IntegrationTests
       - id: ctest
         run: ctest --test-dir build_test
