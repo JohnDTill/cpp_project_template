@@ -32,4 +32,4 @@ jobs:
           BUILD_CONFIG=""
           if [ "${{ matrix.os }}" = "windows-latest" ]; then BUILD_CONFIG="--config Debug"; fi
           cmake --build build_test --target IntegrationTests $BUILD_CONFIG
-          ctest --test-dir build_test -V $BUILD_CONFIG
+          ctest --test-dir build_test -V
