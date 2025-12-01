@@ -24,9 +24,7 @@ jobs:
         with:
           runVcpkgInstall: true
 
-      - id: cmake_configure
+      - name: Configure, Build, and Test
         run: cmake -D CMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -S . -B build_test
-      - id: cmake_build
-        run: cmake --build build_test --config Debug --target IntegrationTests
-      - id: ctest
-        run: ctest --test-dir build_test -V
+             cmake --build build_test --config Debug --target IntegrationTests
+             ctest --test-dir build_test -V
